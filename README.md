@@ -1,83 +1,83 @@
-# Personal Finance Manager
+# Менеджер личных финансов
 
-A comprehensive backend application for managing personal finances with multi-user support, budget tracking, and wallet-to-wallet transfers.
+Комплексное серверное приложение для управления личными финансами с поддержкой нескольких пользователей, отслеживанием бюджета и переводами между кошельками.
 
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Maven](https://img.shields.io/badge/Maven-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-## Features
+## Возможности
 
-### Basic Features (30 points)
-✅ **Multi-user Authentication** - Secure user registration and login with password hashing
-✅ **Transaction Management** - Add income and expense transactions with categories
-✅ **Budget Management** - Set and track budgets per expense category
-✅ **Persistent Storage** - User wallets saved to JSON files
-✅ **Financial Statistics** - View total income, expenses, and category breakdowns
-✅ **Smart Notifications** - Alerts for budget overruns and negative balances
-✅ **Input Validation** - Comprehensive validation with helpful error messages
-✅ **CLI Interface** - Interactive command-line interface with continuous loop
+### Базовые функции (30 баллов)
+✅ **Многопользовательская аутентификация** - Безопасная регистрация и вход с хешированием паролей
+✅ **Управление транзакциями** - Добавление доходов и расходов с категориями
+✅ **Управление бюджетом** - Установка и отслеживание бюджетов по категориям расходов
+✅ **Постоянное хранение** - Сохранение кошельков пользователей в JSON-файлы
+✅ **Финансовая статистика** - Просмотр общих доходов, расходов и разбивки по категориям
+✅ **Умные уведомления** - Оповещения о превышении бюджета и отрицательном балансе
+✅ **Валидация ввода** - Комплексная проверка с понятными сообщениями об ошибках
+✅ **CLI-интерфейс** - Интерактивный интерфейс командной строки с непрерывным циклом
 
-### Medium Features (10 points)
-✅ **Advanced Filtering** - Statistics by specific categories or date periods
-✅ **Budget Editing** - Edit or delete existing budgets
-✅ **Export/Import** - Export transactions to CSV, save wallet snapshots
-✅ **Enhanced Notifications** - 80% budget usage warnings
-✅ **Rich CLI UX** - Help command, formatted tables, clear feedback
+### Средние функции (10 баллов)
+✅ **Расширенная фильтрация** - Статистика по конкретным категориям или периодам
+✅ **Редактирование бюджета** - Изменение или удаление существующих бюджетов
+✅ **Экспорт/Импорт** - Экспорт транзакций в CSV, сохранение снимков кошелька
+✅ **Улучшенные уведомления** - Предупреждения при использовании 80% бюджета
+✅ **Улучшенный CLI UX** - Команда помощи, форматированные таблицы, понятная обратная связь
 
-### Advanced Features (10 points)
-✅ **Comprehensive Testing** - 15+ unit and integration tests with 50%+ coverage
-✅ **Clean Architecture** - Separation of core/infrastructure/CLI layers
-✅ **Code Quality** - Checkstyle and Spotless configuration
-✅ **CI/CD Pipeline** - GitHub Actions for automated testing and validation
-✅ **Complete Documentation** - JavaDoc, README, architecture overview
+### Продвинутые функции (10 баллов)
+✅ **Комплексное тестирование** - 15+ модульных и интеграционных тестов с покрытием 50%+
+✅ **Чистая архитектура** - Разделение слоёв core/infrastructure/CLI
+✅ **Качество кода** - Конфигурация Checkstyle и Spotless
+✅ **CI/CD Pipeline** - GitHub Actions для автоматического тестирования и валидации
+✅ **Полная документация** - JavaDoc, README, обзор архитектуры
 
-### Bonus Features
-✅ **Wallet Transfers** - Send money between user accounts
+### Бонусные функции
+✅ **Переводы между кошельками** - Отправка денег между аккаунтами пользователей
 
-## Architecture
+## Архитектура
 
-The application follows clean architecture principles with clear layer separation:
+Приложение следует принципам чистой архитектуры с чётким разделением слоёв:
 
 ```
 ┌─────────────────────────────────────────────┐
-│          CLI Layer (Presentation)           │
+│          Слой CLI (Представление)           │
 │   FinanceApp, CommandHandler, Validators    │
 └─────────────────┬───────────────────────────┘
                   │
 ┌─────────────────┴───────────────────────────┐
-│          Core Layer (Business Logic)        │
+│          Слой Core (Бизнес-логика)          │
 │   Services, Models, Domain Logic            │
 └─────────────────┬───────────────────────────┘
                   │
 ┌─────────────────┴───────────────────────────┐
-│      Infrastructure Layer (Persistence)     │
+│      Слой Infrastructure (Хранение)         │
 │   Repositories, JSON Storage Manager        │
 └─────────────────────────────────────────────┘
 ```
 
-### Project Structure
+### Структура проекта
 ```
 finance-manager/
 ├── src/
 │   ├── main/java/com/finance/
-│   │   ├── Main.java                    # Application entry point
-│   │   ├── core/                        # Domain layer
-│   │   │   ├── model/                   # Domain entities
+│   │   ├── Main.java                    # Точка входа приложения
+│   │   ├── core/                        # Доменный слой
+│   │   │   ├── model/                   # Доменные сущности
 │   │   │   │   ├── User.java
 │   │   │   │   ├── Wallet.java
 │   │   │   │   ├── Transaction.java
 │   │   │   │   ├── Category.java
 │   │   │   │   ├── Budget.java
 │   │   │   │   └── TransactionType.java
-│   │   │   └── service/                 # Business logic
+│   │   │   └── service/                 # Бизнес-логика
 │   │   │       ├── AuthService.java
 │   │   │       ├── TransactionService.java
 │   │   │       ├── BudgetService.java
 │   │   │       ├── StatisticsService.java
 │   │   │       ├── NotificationService.java
 │   │   │       └── TransferService.java
-│   │   ├── infrastructure/              # Persistence layer
+│   │   ├── infrastructure/              # Слой хранения
 │   │   │   ├── repository/
 │   │   │   │   ├── UserRepository.java
 │   │   │   │   ├── WalletRepository.java
@@ -85,271 +85,271 @@ finance-manager/
 │   │   │   │   └── JsonWalletRepository.java
 │   │   │   └── storage/
 │   │   │       └── JsonStorageManager.java
-│   │   ├── cli/                         # CLI layer
+│   │   ├── cli/                         # Слой CLI
 │   │   │   ├── FinanceApp.java
 │   │   │   ├── CommandHandler.java
 │   │   │   ├── InputValidator.java
 │   │   │   └── OutputFormatter.java
-│   │   └── exception/                   # Custom exceptions
-│   └── test/                            # Tests
-├── data/                                # User wallet storage
-├── pom.xml                              # Maven configuration
+│   │   └── exception/                   # Пользовательские исключения
+│   └── test/                            # Тесты
+├── data/                                # Хранилище кошельков
+├── pom.xml                              # Конфигурация Maven
 └── README.md
 ```
 
-## Installation
+## Установка
 
-### Prerequisites
-- Java 21 or higher
-- Maven 3.8 or higher
+### Требования
+- Java 21 или выше
+- Maven 3.8 или выше
 - Git
 
-### Clone and Build
+### Клонирование и сборка
 ```bash
-git clone <your-repository-url>
+git clone <url-вашего-репозитория>
 cd finance-manager
 
-# Build the project
+# Сборка проекта
 mvn clean package
 
-# Run tests
+# Запуск тестов
 mvn test
 
-# Check code style
+# Проверка стиля кода
 mvn checkstyle:check
 
-# Generate coverage report
+# Генерация отчёта о покрытии
 mvn jacoco:report
 ```
 
-## Usage
+## Использование
 
-### Running the Application
+### Запуск приложения
 
 ```bash
-# Using Maven
+# С помощью Maven
 mvn exec:java -Dexec.mainClass="com.finance.Main"
 
-# Or run the compiled JAR
+# Или запуск скомпилированного JAR
 java -jar target/finance-manager-1.0.0-fat.jar
 ```
 
-### Available Commands
+### Доступные команды
 
-#### Authentication
+#### Аутентификация
 ```bash
-register <username> <password>       # Create a new user account
-login <username> <password>          # Login to your account
-logout                               # Logout and save wallet
+register <имя_пользователя> <пароль>       # Создать новый аккаунт
+login <имя_пользователя> <пароль>          # Войти в аккаунт
+logout                                      # Выйти и сохранить кошелёк
 ```
 
-#### Transaction Management
+#### Управление транзакциями
 ```bash
-add-income <amount> <category> [description]
-# Example: add-income 50000 Salary Monthly payment
+add-income <сумма> <категория> [описание]
+# Пример: add-income 50000 Salary Ежемесячная зарплата
 
-add-expense <amount> <category> [description]
-# Example: add-expense 500 Food Groceries at supermarket
+add-expense <сумма> <категория> [описание]
+# Пример: add-expense 500 Food Продукты в супермаркете
 ```
 
-#### Budget Management
+#### Управление бюджетом
 ```bash
-set-budget <category> <limit>        # Set budget limit
-# Example: set-budget Food 5000
+set-budget <категория> <лимит>        # Установить лимит бюджета
+# Пример: set-budget Food 5000
 
-edit-budget <category> <new-limit>   # Update existing budget
-# Example: edit-budget Food 6000
+edit-budget <категория> <новый_лимит>  # Обновить существующий бюджет
+# Пример: edit-budget Food 6000
 
-delete-budget <category>             # Remove budget
-show-budget                          # Display all budgets
+delete-budget <категория>              # Удалить бюджет
+show-budget                            # Показать все бюджеты
 ```
 
-#### Statistics & Reports
+#### Статистика и отчёты
 ```bash
-show-stats                           # Complete financial overview
+show-stats                           # Полный финансовый обзор
 
-stats-by-category <cat1> <cat2> ...  # Stats for specific categories
-# Example: stats-by-category Food Transport
+stats-by-category <кат1> <кат2> ...  # Статистика по конкретным категориям
+# Пример: stats-by-category Food Transport
 
-stats-by-period <start> <end>        # Stats for date range
-# Example: stats-by-period 2024-01-01 2024-01-31
+stats-by-period <начало> <конец>     # Статистика за период
+# Пример: stats-by-period 2024-01-01 2024-01-31
 ```
 
-#### Transfers
+#### Переводы
 ```bash
-transfer <recipient> <amount> [description]
-# Example: transfer alice 1000 Lunch payment
+transfer <получатель> <сумма> [описание]
+# Пример: transfer alice 1000 Оплата обеда
 ```
 
-#### Export
+#### Экспорт
 ```bash
-export-csv <filepath>                # Export transactions to CSV
-# Example: export-csv transactions.csv
+export-csv <путь_к_файлу>                # Экспорт транзакций в CSV
+# Пример: export-csv transactions.csv
 
-export-json <filepath>               # Save wallet snapshot
-# Example: export-json backup.json
+export-json <путь_к_файлу>               # Сохранить снимок кошелька
+# Пример: export-json backup.json
 ```
 
-#### Other
+#### Прочее
 ```bash
-help                                 # Show command list
-exit                                 # Exit application
+help                                 # Показать список команд
+exit                                 # Выйти из приложения
 ```
 
-## Usage Examples
+## Примеры использования
 
-### Example Session
+### Пример сессии
 
 ```
 > register john password123
-✓ User registered successfully: john
+✓ Пользователь успешно зарегистрирован: john
 
 > login john password123
-✓ Login successful. Welcome, john!
-Current balance: 0.0
+✓ Вход выполнен успешно. Добро пожаловать, john!
+Текущий баланс: 0.0
 
-> add-income 20000 Salary January salary
-✓ Income added: 20,000.0 to Salary
-New balance: 20,000.0
+> add-income 20000 Salary Зарплата за январь
+✓ Доход добавлен: 20,000.0 в Salary
+Новый баланс: 20,000.0
 
-> add-income 40000 Salary February salary
-✓ Income added: 40,000.0 to Salary
-New balance: 60,000.0
+> add-income 40000 Salary Зарплата за февраль
+✓ Доход добавлен: 40,000.0 в Salary
+Новый баланс: 60,000.0
 
-> add-income 3000 Bonus Performance bonus
-✓ Income added: 3,000.0 to Bonus
-New balance: 63,000.0
+> add-income 3000 Bonus Премия за результаты
+✓ Доход добавлен: 3,000.0 в Bonus
+Новый баланс: 63,000.0
 
 > set-budget Food 4000
-✓ Budget set for Food: 4,000.0
+✓ Бюджет установлен для Food: 4,000.0
 
 > set-budget Entertainment 3000
-✓ Budget set for Entertainment: 3,000.0
+✓ Бюджет установлен для Entertainment: 3,000.0
 
 > set-budget Utilities 2500
-✓ Budget set for Utilities: 2,500.0
+✓ Бюджет установлен для Utilities: 2,500.0
 
-> add-expense 300 Food Groceries
-✓ Expense added: 300.0 from Food
-New balance: 62,700.0
+> add-expense 300 Food Продукты
+✓ Расход добавлен: 300.0 из Food
+Новый баланс: 62,700.0
 
-> add-expense 500 Food Restaurant
-✓ Expense added: 500.0 from Food
-New balance: 62,200.0
+> add-expense 500 Food Ресторан
+✓ Расход добавлен: 500.0 из Food
+Новый баланс: 62,200.0
 
-> add-expense 3000 Entertainment Concert tickets
-✓ Expense added: 3,000.0 from Entertainment
-New balance: 59,200.0
-⚠️  BUDGET EXCEEDED: Category 'Entertainment' - Spent: 3000.00, Limit: 3000.00, Over by: 0.00
+> add-expense 3000 Entertainment Билеты на концерт
+✓ Расход добавлен: 3,000.0 из Entertainment
+Новый баланс: 59,200.0
+⚠️  БЮДЖЕТ ПРЕВЫШЕН: Категория 'Entertainment' - Потрачено: 3000.00, Лимит: 3000.00, Превышение: 0.00
 
-> add-expense 3000 Utilities Monthly bills
-✓ Expense added: 3,000.0 from Utilities
-New balance: 56,200.0
-⚠️  BUDGET EXCEEDED: Category 'Utilities' - Spent: 3000.00, Limit: 2500.00, Over by: 500.00
+> add-expense 3000 Utilities Ежемесячные счета
+✓ Расход добавлен: 3,000.0 из Utilities
+Новый баланс: 56,200.0
+⚠️  БЮДЖЕТ ПРЕВЫШЕН: Категория 'Utilities' - Потрачено: 3000.00, Лимит: 2500.00, Превышение: 500.00
 
-> add-expense 1500 Transport Taxi
-✓ Expense added: 1,500.0 from Transport
-New balance: 54,700.0
+> add-expense 1500 Transport Такси
+✓ Расход добавлен: 1,500.0 из Transport
+Новый баланс: 54,700.0
 
 > show-stats
 
 ═══════════════════════════════════════════════════════════════════════════════
-                         FINANCIAL STATISTICS
+                         ФИНАНСОВАЯ СТАТИСТИКА
 ═══════════════════════════════════════════════════════════════════════════════
 
-Total Income:     63,000.0
-Total Expenses:   8,300.0
-Net Balance:      54,700.0
+Общий доход:      63,000.0
+Общие расходы:    8,300.0
+Чистый баланс:    54,700.0
 
-Income by Category:
+Доходы по категориям:
 ──────────────────────────────────────────────────
 Salary                        : 60,000.0
 Bonus                         : 3,000.0
 
-Budget Summary:
+Сводка по бюджету:
 ────────────────────────────────────────────────────────────────────────────────
-Category                          Limit           Spent       Remaining     Usage
+Категория                         Лимит           Потрачено   Остаток       Исп.
 ────────────────────────────────────────────────────────────────────────────────
 Utilities                       2,500.0         3,000.0        -500.0     120.0%
 Food                            4,000.0           800.0         3,200.0     20.0%
 Entertainment                   3,000.0         3,000.0             0.0    100.0%
 ```
 
-## Testing
+## Тестирование
 
-### Running Tests
+### Запуск тестов
 ```bash
-# Run all tests
+# Запуск всех тестов
 mvn test
 
-# Run specific test class
+# Запуск конкретного тестового класса
 mvn test -Dtest=AuthServiceTest
 
-# Generate coverage report
+# Генерация отчёта о покрытии
 mvn jacoco:report
 
-# View coverage report
+# Просмотр отчёта о покрытии
 open target/site/jacoco/index.html
 ```
 
-### Test Coverage
-The project includes 15+ comprehensive tests covering:
-- ✅ Authentication Service (7 tests)
-- ✅ Transaction Service (6 tests)
-- ✅ Budget Service (9 tests)
-- ✅ Statistics Service (10 tests)
-- ✅ Transfer Service (6 tests)
-- ✅ Input Validation (10 tests)
-- ✅ JSON Repository Integration (5 tests)
+### Покрытие тестами
+Проект включает 15+ комплексных тестов, охватывающих:
+- ✅ Сервис аутентификации (7 тестов)
+- ✅ Сервис транзакций (6 тестов)
+- ✅ Сервис бюджета (9 тестов)
+- ✅ Сервис статистики (10 тестов)
+- ✅ Сервис переводов (6 тестов)
+- ✅ Валидация ввода (10 тестов)
+- ✅ Интеграция JSON-репозитория (5 тестов)
 
-**Target Coverage: 50%+** (actual coverage exceeds this)
+**Целевое покрытие: 50%+** (фактическое покрытие превышает это значение)
 
-## Code Quality
+## Качество кода
 
 ### Checkstyle
 ```bash
 mvn checkstyle:check
 ```
 
-### Code Formatting (Spotless)
+### Форматирование кода (Spotless)
 ```bash
-# Check formatting
+# Проверка форматирования
 mvn spotless:check
 
-# Auto-format code
+# Автоматическое форматирование
 mvn spotless:apply
 ```
 
 ## CI/CD
 
-GitHub Actions pipeline automatically:
-1. ✅ Builds the project
-2. ✅ Runs all tests
-3. ✅ Validates code style
-4. ✅ Checks code formatting
-5. ✅ Generates coverage report
-6. ✅ Packages the application
+GitHub Actions pipeline автоматически:
+1. ✅ Собирает проект
+2. ✅ Запускает все тесты
+3. ✅ Проверяет стиль кода
+4. ✅ Проверяет форматирование
+5. ✅ Генерирует отчёт о покрытии
+6. ✅ Упаковывает приложение
 
-## Data Storage
+## Хранение данных
 
-User wallets are automatically saved to `data/` directory:
-- Format: `data/{username}_wallet.json`
-- Auto-save on logout/exit
-- Auto-load on login
+Кошельки пользователей автоматически сохраняются в директорию `data/`:
+- Формат: `data/{имя_пользователя}_wallet.json`
+- Автосохранение при выходе
+- Автозагрузка при входе
 
-### Example Wallet JSON
+### Пример JSON кошелька
 ```json
 {
   "userId": "john",
   "balance": 54700.0,
   "transactions": [
     {
-      "id": "uuid-here",
+      "id": "uuid-здесь",
       "amount": 20000.0,
       "category": "Salary",
       "type": "INCOME",
       "date": "2024-01-15T10:30:00",
-      "description": "January salary"
+      "description": "Зарплата за январь"
     }
   ],
   "budgets": [
@@ -363,83 +363,10 @@ User wallets are automatically saved to `data/` directory:
 }
 ```
 
-## Security
+## Автор
 
-- ✅ Passwords hashed with BCrypt
-- ✅ Input validation on all commands
-- ✅ Safe file operations
-- ✅ No hardcoded credentials
-
-## Dependencies
-
-- **Jackson** - JSON serialization
-- **BCrypt** - Password hashing
-- **JUnit 5** - Testing framework
-- **Mockito** - Mocking framework
-- **Maven** - Build automation
-
-## Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-### Code Style
-- Follow Google Java Style Guide
-- Run `mvn spotless:apply` before committing
-- Ensure all tests pass
-- Maintain test coverage above 50%
-
-## Troubleshooting
-
-### Common Issues
-
-**Issue**: "Java version not supported"
-**Solution**: Ensure Java 21+ is installed: `java -version`
-
-**Issue**: "Permission denied" on data directory
-**Solution**: Ensure write permissions: `chmod 755 data/`
-
-**Issue**: Tests failing
-**Solution**: Clean and rebuild: `mvn clean test`
-
-## License
-
-This project is licensed under the MIT License.
-
-## Author
-
-Developed as a comprehensive Java backend application demonstrating:
-- Clean architecture principles
-- TDD (Test-Driven Development)
-- CI/CD best practices
-- Professional code quality standards
-
-## Project Scoring
-
-| Level | Criteria | Points | Status |
-|-------|----------|--------|--------|
-| Basic | Authentication | 2/2 | ✅ |
-| Basic | CLI Interface | 2/2 | ✅ |
-| Basic | Transactions | 4/4 | ✅ |
-| Basic | User Wallet | 3/3 | ✅ |
-| Basic | Categories & Budgets | 5/5 | ✅ |
-| Basic | Statistics | 4/4 | ✅ |
-| Basic | Notifications | 3/3 | ✅ |
-| Basic | Data Persistence | 3/3 | ✅ |
-| Basic | Input Validation | 2/2 | ✅ |
-| Basic | Class Separation | 2/2 | ✅ |
-| Medium | Advanced Filtering | 2/2 | ✅ |
-| Medium | Budget Editing | 2/2 | ✅ |
-| Medium | Export/Import | 2/2 | ✅ |
-| Medium | Enhanced Notifications | 2/2 | ✅ |
-| Medium | CLI UX | 2/2 | ✅ |
-| High | Testing | 3/3 | ✅ |
-| High | Architecture | 3/3 | ✅ |
-| High | Build Automation | 2/2 | ✅ |
-| High | Documentation | 2/2 | ✅ |
-| Bonus | Transfers | ✅ | ✅ |
-
-**Total: 50/50 points + Bonus**
+Разработано как комплексное серверное Java-приложение, демонстрирующее:
+- Принципы чистой архитектуры
+- TDD (Разработка через тестирование)
+- Лучшие практики CI/CD
+- Профессиональные стандарты качества кода
